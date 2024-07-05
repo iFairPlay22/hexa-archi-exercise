@@ -1,0 +1,8 @@
+services:
+  mongodb:
+    image: bitnami/mongodb:5.0
+    ports:
+      - "27017:27017"
+    environment:
+      MONGODB_REPLICA_SET_MODE: primary
+      ALLOW_EMPTY_PASSWORD: 'yes'
