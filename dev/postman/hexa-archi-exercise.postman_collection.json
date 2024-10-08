@@ -25,12 +25,12 @@
 			"response": []
 		},
 		{
-			"name": "Get all todos by tag",
+			"name": "Get all todos by filter",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/todos?tag={{tag}}",
+					"raw": "{{host}}/api/todos?filter={{filter}}",
 					"host": [
 						"{{host}}"
 					],
@@ -40,8 +40,8 @@
 					],
 					"query": [
 						{
-							"key": "tag",
-							"value": "{{tag}}"
+							"key": "filter",
+							"value": "{{filter}}"
 						}
 					]
 				}
@@ -174,7 +174,7 @@
 			"value": "6671c2707167b70bb531bef2"
 		},
 		{
-			"key": "tag",
+			"key": "filter",
 			"value": "health",
 			"type": "string"
 		}

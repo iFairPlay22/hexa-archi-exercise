@@ -1,3 +1,6 @@
+dev/docker/mongo-dump
+dev/docker/mongo-storage
+
 #Maven
 target/
 pom.xml.tag
@@ -35,9 +38,6 @@ nb-configuration.xml
 # patch
 *.orig
 *.rej
-
-# Local environment
-.env
 
 # Plugin directory
 /.quarkus/cli/plugins/

@@ -1,29 +1,50 @@
 # hexa-archi-exercise
 
-This repository is a backend project based on `Quarkus` and `MongoDB`, which allows to manipulate todos, thanks to a CRUD API.
+This repository contains a backend project based on `Quarkus` and `MongoDB`.
+The API allows to manipulate a todo list for different users, thanks to a CRUD API.
+Also, a very simple login process is implemented.
+
+## Technical notes
+
+Some concepts of the hexagonal architecture are used in this project, like the use of ports, 
+adapters, and a decomposition in 3 modules: application, domain and infra, that are linked
+via the concept of unversed dependencies. However, not all principles are respected, in order 
+use Quarkus in a simple way (ex: the application chooses its adapters).
+
+Some tests are implemented in the project, and some of them are integration tests.
+The aim is to be able to identify the breaking changes easily by testing the application globally.
 
 ## Run the application
 
-In order to run the application, you need to install `java` and `quarkus` in your machine.
+In order to run the application, you need to install `java`, `mvn` and `podman` in your machine.
 Please check the following documentation if it is not already the case:
 - https://www.java.com/en/download/help/download_options.html (for java)
-- https://quarkus.io/guides/cli-tooling (for quarkus-cli)
+- https://maven.apache.org/install.html (for mvn)
+- https://podman.io/docs/installation (for podman)
 
-Then, you can run the backend in dev using:
-```shell script
-quarkus dev
+Then, open a terminal at `./dev/docker` and launch the required docker containers using:
+```shell
+podman-compose -p hexa-archi-exercise up -d
 ```
 
-The application will be available in the port **8080**.
+NB: To stop the containers, you can run
 
-Note that you can test the API using the postman collection located [there](dev%2Fhexa-archi-exercise.postman_collection.json).
+```shell
+podman-compose -p hexa-archi-exercise down
+```
 
-## Exercise instructions
+To compile the backend, run:
+```shell
+mvn compile
+```
 
-Before starting the exercise, you should of course get familiar with [Quarkus](https://quarkus.io/guides/getting-started) and [MongoDB](https://www.mongodb.com/docs/manual/tutorial/getting-started/) basics.
+To launch the tests, run:
+```shell
+mvn test
+```
 
-1) As a first task, please edit the API so that we can filter by tag, without considering case matching and accents (ex: 'Santé' should match with 'sante'). Also, we would like to be able to specify multiple tags as a parameter. 
-2) Then, add 3 users: 'Ewen' & 'Sebastien', two regular users and 'Nicolas', the admin. A regular user should be able to add/modify/delete/get its own todos, while the administrator has full rights.
-3) Finally, refactor the application to use the [hexagonal infrastructure](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)). NB: Propose a system to make sure that there is no regression.
+To launch the backend, run the [main](application/src/main/java/lunatech/application/Main.java)
 
-Good luck ! ;) 
+By default, the application will be available in the port **8080**.
+
+Note that you can test the API using the postman collection located [there](dev/postman/hexa-archi-exercise.postman_collection.json).
