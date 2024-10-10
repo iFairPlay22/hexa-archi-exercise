@@ -12,16 +12,16 @@ services:
     healthcheck:
       test: test $$(
         mongosh
-          --port 27017
-          --quiet
-          --eval
-          "
-            try {
-              rs.initiate({ _id:'rs1', members:[ { _id:0, host:'mongo-db:27017' } ]  })
-            } catch(e) {
-              rs.status().ok
-            }
-          "
+        --port 27017
+        --quiet
+        --eval
+        "
+        try {
+        rs.initiate({ _id:'rs1', members:[ { _id:0, host:'mongo-db:27017' } ]  })
+        } catch(e) {
+        rs.status().ok
+        }
+        "
         ) -eq 1
       interval: 10s
       start_period: 30s

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>lunatech</groupId>
     <artifactId>hexa-archi-exercise</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>domain</module>
+        <module>infra</module>
+        <module>application</module>
+        <module>test-resources</module>
+    </modules>
 
     <properties>
         <compiler-plugin.version>3.12.1</compiler-plugin.version>
@@ -12,8 +20,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.11.2</quarkus.platform.version>
-        <skipITs>true</skipITs>
+        <quarkus.platform.version>3.15.1</quarkus.platform.version>
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
     </properties>
 
@@ -56,8 +63,17 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-test-security</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -71,14 +87,45 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-            <version>0.10.3</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.javatuples</groupId>
-            <artifactId>javatuples</artifactId>
-            <version>1.2</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5-component</artifactId>
+            <version>3.15.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mongodb</artifactId>
+            <version>1.20.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.26.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -131,7 +178,8 @@
                 </executions>
                 <configuration>
                     <systemPropertyVariables>
-                        <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                        <native.image.path>${project.build.directory}/${project.build.finalName}-runner
+                        </native.image.path>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
